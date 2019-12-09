@@ -36,6 +36,8 @@ Then to use this in a card place the following in your entity card:
 
 The values for the colors can be any valid color string in "HEX", "RGB" or by color name.
 
+If the light brightness is changed via any other means (slider, service call, etc) the buttons will indicate which range the light brightness is in based on the "valid Range" settings noted above.
+
 <b>Comfguration Examples:</b>
     
   ```

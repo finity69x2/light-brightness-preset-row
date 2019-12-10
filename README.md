@@ -75,9 +75,9 @@ If the light brightness is changed via any other means (slider, service call, et
 
 This is with the default Lovelace frontend theme set:
 
-![Default](default_fan_ex.gif)
+![Default](ex2.gif)
 
 
 This is with the "Slate" frontend theme set:
 
-![Slate](slate_fan_ex.gif)
+![Slate](ex3.gif)

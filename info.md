@@ -1,1 +1,1 @@
-This allows you to create a graphical interface row for your 3 speed ceiling fans in Home Assistant.
+Provides a means to program 3 preset brightness settings for dimmable lights selectable from a Lovelace button row.

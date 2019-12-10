@@ -29,9 +29,9 @@ Then to use this in a card place the following in your entity card:
 | IsOnMedColor | String | No | '#43A047' | Sets the color of the 'Med' button if light is on Medium |
 | IsOnHiColor | String | No | '#43A047' | Sets the color of the 'Hi' button if light is on high |
 | ButtonInactiveColor | String | No | '#759aaa' | Sets the color of the the buttons if that selection is not "active" |
-| LowBrightness | integer | No | 43 | Sets the brighness level for the "Low" button (valid range: 0 - 85) |
-| MedBrightness | integer | No | 128 | Sets the brighness level for the "Med" button (valid range: 86 - 170) |
-| HiBrightness | integer | No | 213 | Sets the brighness level for the "High" button (valid range: 171 - 255)|
+| LowBrightness | Integer | No | 43 | Sets the brighness level for the "Low" button (valid range: 0 - 85) |
+| MedBrightness | Integer | No | 128 | Sets the brighness level for the "Med" button (valid range: 86 - 170) |
+| HiBrightness | Integer | No | 213 | Sets the brighness level for the "High" button (valid range: 171 - 255)|
 
 
 The values for the colors can be any valid color string in "HEX", "RGB" or by color name.

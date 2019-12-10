@@ -1,4 +1,4 @@
-# light-brighness-preset-row
+# light-brightness-preset-row
 Provides a means to program 3 preset brightness settings for dimmable lights
 
 Installation:

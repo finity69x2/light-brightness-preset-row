@@ -1,6 +1,8 @@
 # light-brightness-preset-row
 Provides a means to program 3 preset brightness settings for dimmable lights selectable from a Lovelace button row.
 
+This pluig-in was inspired by user @jazzyisj on the Home Assistant forum (community.home-assistant.io) as a thematically complementary plug-in for my fan control row.
+
 Installation:
 
 Copy the light-brightness-preset-row.js file to the appropriate folder in your Home Assistant Configuration directory (/config/www/).

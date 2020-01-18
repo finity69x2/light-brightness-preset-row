@@ -40,7 +40,7 @@ The values for the colors can be any valid color string in "HEX", "RGB" or by co
 
 If the light brightness is changed via any other means (slider, service call, etc) the buttons will indicate which range the light brightness is in based on the "valid Range" settings noted above.
 
-<b>Comfguration Examples:</b>
+<b>Configuration Examples:</b>
     
   ```
     cards:

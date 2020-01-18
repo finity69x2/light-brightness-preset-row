@@ -124,8 +124,8 @@ class CustomLightBrightnessRow extends Polymer.Element {
 			//lowSetpoint =  parseInt(LowSetpoint);
 			medSetpoint = parseInt(MedSetpoint);
 			//hiSetpoint = parseInt(HiSetpoint);
-			if (parseInt(LowSetpoint) < 0) {
-				lowSetpoint = 0;
+			if (parseInt(LowSetpoint) < 1) {
+				lowSetpoint = 1;
 			} else {
 				lowSetpoint =  parseInt(LowSetpoint);
 			}

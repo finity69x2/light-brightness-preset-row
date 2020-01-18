@@ -4,6 +4,41 @@ This pluig-in was inspired by user @jazzyisj on the Home Assistant forum (commun
 
 This element is completely theme-able to provide a match to the "fan-control-entity-row" to provide a consistent look for the different elements in your Lovelace frontend
 
+<b>Configuration Examples:</b>
+    
+  ```
+    cards:
+      - type: entities
+        title: Hall Light Presets
+        show_header_toggle: false
+        entities:
+        ## USE THIS CONFIG TO HAVE IT MATCH YOUR THEME ##
+          - entity: light.hall_light
+            type: custom:light-brightness-preset-row
+            name: Light Not Custom Theme
+            customTheme: false
+        ## USE THIS CONFIG TO USE A DEFAULT CUSTOM THEME
+          - entity: light.hall_light
+            type: custom:light-brightness-preset-row
+            name: Light Default Custom Theme
+            customTheme: true
+            customSetpoints: true
+            LowBrightness: 30
+            MedBrightness: 100
+            HiBrightness: 225
+        ## USE THIS CONFIG TO USE A 'CUSTOMZED' CUSTOM THEME
+          - entity: light.hall_light
+            type: custom:light-brightness-preset-row
+            name: Light Custom Custom Theme
+            customTheme: true
+            IsOnLowColor: 'rgb(255, 0, 0)'
+            IsOnMedColor: '#888888'
+            IsOnHiColor: '#222222'
+            ButtonInactiveColor: '#aaaaaa'
+            IsOffColor: 'purple'
+            
+  ```
+
 This is with the default Lovelace frontend theme set:
 
 ![Default](ex2.gif)

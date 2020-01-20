@@ -121,31 +121,32 @@ class CustomLightBrightnessRow extends Polymer.Element {
 		let offstate;
 		
 		if (custSetpoint) {
-			if (parseInt(LowSetpoint) > 85) {
-				lowSetpoint = 85;
+			//lowSetpoint =  parseInt(LowSetpoint);
+			medSetpoint = parseInt(MedSetpoint);
+			//hiSetpoint = parseInt(HiSetpoint);
+			if (parseInt(LowSetpoint) < 1) {
+				lowSetpoint = 1;
 			} else {
 				lowSetpoint =  parseInt(LowSetpoint);
 			}
-			if (parseInt(MedSetpoint) < 86) {
-				medSetpoint = 86;
-			} else if (parseInt(MedSetpoint) > 170) {
-				medSetpoint = 170;
-			} else {
-				medSetpoint = parseInt(MedSetpoint);
-			}
-			if (parseInt(HiSetpoint) < 171) {
-				hiSetpoint = 171;
-			} else if (parseInt(HiSetpoint) > 254) {	
+			//if (parseInt(MedSetpoint) < 86) {
+			//	medSetpoint = 86;
+			//} else if (parseInt(MedSetpoint) > 170) {
+			//	medSetpoint = 170;
+			//} else {
+			//	medSetpoint = parseInt(MedSetpoint);
+			//}
+			if (parseInt(HiSetpoint) > 254) {	
 				hiSetpoint = 254;
 			} else {
 				hiSetpoint = parseInt(HiSetpoint);
 			}
 			if (stateObj && stateObj.attributes) {
-				if (stateObj.state == 'on' && stateObj.attributes.brightness >= 0 && stateObj.attributes.brightness <= 85 ) {
+				if (stateObj.state == 'on' && stateObj.attributes.brightness >= 0 && stateObj.attributes.brightness <= ((medSetpoint + lowSetpoint)/2 ) ) {
 					low = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness >= 86 && stateObj.attributes.brightness <= 170) {
+				} else if (stateObj.state == 'on' && stateObj.attributes.brightness > ((medSetpoint + lowSetpoint)/2 ) && stateObj.attributes.brightness <= ((hiSetpoint + medSetpoint)/2) ) {
 					med = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness >= 171 && stateObj.attributes.brightness <= 255) {
+				} else if (stateObj.state == 'on' && stateObj.attributes.brightness > ((hiSetpoint + medSetpoint)/2) && stateObj.attributes.brightness <= 255) {
 					high = 'on';
 				} else {
 					offstate = 'on';

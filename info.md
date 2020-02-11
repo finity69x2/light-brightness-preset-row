@@ -1,4 +1,4 @@
-Provides a means to program 3 preset brightness settings for dimmable lights selectable from a Lovelace button row.
+Provides a means to program 3 preset brightness settings for dimmable lights selectable from a Lovelace button row. THis plugin will also accept a "light group" as the entity_id.
 
 This pluig-in was inspired by user @jazzyisj on the Home Assistant forum (community.home-assistant.io) as a thematically complementary plug-in for my fan control row.
 

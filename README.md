@@ -21,7 +21,7 @@ Then to use this in a card place the following in your entity card:
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| entity | String | Yes | none | a dimmable light entity_id |
+| entity | String | Yes | none | any dimmable light entity_id (including "light group" entities) |
 | type | String | Yes | none | custom:light-brightness-entity-row |
 | name | String | No | none | A custom name for the entity in the row |
 | customTheme | Boolean | No | false | set to true to use a custom theme |
@@ -39,6 +39,8 @@ Then to use this in a card place the following in your entity card:
 The values for the colors can be any valid color string in "HEX", "RGB" or by color name.
 
 If the light brightness is changed via any other means (slider, service call, etc) the buttons will indicate which range the light brightness is in based on the setpoint settings in the config.
+
+This plugin can also be used with a group of dimmable lights by creating a "light group". Then each light in the group will be simultaneously controlled by the plugin.
 
 <b>Configuration Examples:</b>
     

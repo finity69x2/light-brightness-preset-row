@@ -91,7 +91,7 @@ class CustomLightBrightnessRow extends Polymer.Element {
 			IsOnLowColor: '#43A047',
 			IsOnMedColor: '#43A047',
 			IsOnHiColor: '#43A047',
-			IsOffSpdColor: '#759aaa',
+			ButtonInactiveColor: '#759aaa',
 			...config
 		};
 	}

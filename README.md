@@ -85,3 +85,7 @@ This is with the default Lovelace frontend theme set:
 This is with the "Slate" frontend theme set:
 
 ![Slate](ex3.gif)
+
+This is how this plugin looks with the Fan control & Binary Button Rows:
+
+![Slate-Compare](button-row-example-compare.gif)

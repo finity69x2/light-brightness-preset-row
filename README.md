@@ -41,6 +41,10 @@ Then to use this in a card place the following in your entity card:
 | LowBrightness | Integer | No | 43 | Sets the brighness level for the "Low" button |
 | MedBrightness | Integer | No | 128 | Sets the brighness level for the "Med" button  |
 | HiBrightness | Integer | No | 213 | Sets the brighness level for the "High" button (max 254) |
+| customOffText | String | No | 'OFF' | Sets the text of the "off" button |
+| customLowText | String | No | 'LOW' | Sets the text of the "low" speed button |
+| customMedText | String | No | 'MED' | Sets the text of the "medium" speed button |
+| customHiText | String | No | 'HIGH' | Sets the text of the "High" speed button |
 
 
 The values for the colors can be any valid color string in "HEX", "RGB" or by color name.
@@ -81,6 +85,14 @@ This plugin can also be used with a group of dimmable lights by creating a "ligh
             IsOnHiColor: '#222222'
             ButtonInactiveColor: '#aaaaaa'
             IsOffColor: 'purple'
+        ## USE THIS CONFIG TO SET CUSTOM BUTTON TEXT (NOT REQUIRED TO SET "customTheme: true" TO USE THESE )
+          - entity: light.hall_light
+            type: custom:light-brightness-preset-row
+            name: Light Custom Button Text
+            customHiText: me
+            customLowText: do
+            customMedText: re
+            customOffText: not
             
   ```
 

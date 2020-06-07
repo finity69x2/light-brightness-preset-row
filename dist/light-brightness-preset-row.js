@@ -8,19 +8,19 @@ class CustomLightBrightnessRow extends Polymer.Element {
 					line-height: inherit;
 				}
 				.brightness {
-					min-width: 30px;
-					max-width: 30px;
-					height: 30px;
-					margin-left: 2px;
-					margin-right: 2px;
-					background-color: #759aaa;
-					border: 1px solid lightgrey; 
-					border-radius: 4px;
-					font-size: 10px !important;
-					color: inherit;
-					text-align: center;
-					float: right !important;
-					padding: 1px;
+				min-width: 30px;
+				max-width: 30px;
+				height: 30px;
+				margin-left: 2px;
+				margin-right: 2px;
+				background-color: #759aaa;
+				border: 1px solid lightgrey; 
+				border-radius: 4px;
+				font-size: 10px !important;
+				color: inherit;
+				text-align: center;
+				float: right !important;
+				padding: 1px;
 				}
 				
 				</style>

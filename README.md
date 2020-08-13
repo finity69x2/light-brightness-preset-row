@@ -33,14 +33,15 @@ Then to use this in a card place the following in your entity card:
 | name | String | No | none | A custom name for the entity in the row |
 | customTheme | Boolean | No | false | set to true to use a custom theme |
 | customSetpoints | Boolean | No | false | set to true to use custom brightness setpoints |
-| IsOffColor | String | No | '#f44c09' | Sets the color of the 'Off' button if light is off |
-| IsOnLowColor | String | No | '#43A047' | Sets the color of the 'Low' button if light is on low |
-| IsOnMedColor | String | No | '#43A047' | Sets the color of the 'Med' button if light is on Medium |
-| IsOnHiColor | String | No | '#43A047' | Sets the color of the 'Hi' button if light is on high |
-| ButtonInactiveColor | String | No | '#759aaa' | Sets the color of the the buttons if that selection is not "active" |
-| LowBrightness | Integer | No | 43 | Sets the brighness level for the "Low" button |
-| MedBrightness | Integer | No | 128 | Sets the brighness level for the "Med" button  |
-| HiBrightness | Integer | No | 213 | Sets the brighness level for the "High" button (max 254) |
+| reverseButtons | Boolean | No | false | set to true to reverse the button order |
+| isOffColor | String | No | '#f44c09' | Sets the color of the 'Off' button if light is off |
+| isOnLowColor | String | No | '#43A047' | Sets the color of the 'Low' button if light is on low |
+| isOnMedColor | String | No | '#43A047' | Sets the color of the 'Med' button if light is on Medium |
+| isOnHiColor | String | No | '#43A047' | Sets the color of the 'Hi' button if light is on high |
+| buttonInactiveColor | String | No | '#759aaa' | Sets the color of the the buttons if that selection is not "active" |
+| lowBrightness | Integer | No | 43 | Sets the brighness level for the "Low" button |
+| medBrightness | Integer | No | 128 | Sets the brighness level for the "Med" button  |
+| hiBrightness | Integer | No | 213 | Sets the brighness level for the "High" button (max 254) |
 | customOffText | String | No | 'OFF' | Sets the text of the "off" button |
 | customLowText | String | No | 'LOW' | Sets the text of the "low" speed button |
 | customMedText | String | No | 'MED' | Sets the text of the "medium" speed button |
@@ -72,19 +73,20 @@ This plugin can also be used with a group of dimmable lights by creating a "ligh
             name: Light Default Custom Theme
             customTheme: true
             customSetpoints: true
-            LowBrightness: 30
-            MedBrightness: 100
-            HiBrightness: 225
+            lowBrightness: 30
+            medBrightness: 100
+            hiBrightness: 225
         ## USE THIS CONFIG TO USE A 'CUSTOMZED' CUSTOM THEME
           - entity: light.hall_light
             type: custom:light-brightness-preset-row
             name: Light Custom Custom Theme
+            reverseButtons: true
             customTheme: true
-            IsOnLowColor: 'rgb(255, 0, 0)'
-            IsOnMedColor: '#888888'
-            IsOnHiColor: '#222222'
-            ButtonInactiveColor: '#aaaaaa'
-            IsOffColor: 'purple'
+            isOnLowColor: 'rgb(255, 0, 0)'
+            isOnMedColor: '#888888'
+            isOnHiColor: '#222222'
+            buttonInactiveColor: '#aaaaaa'
+            isOffColor: 'purple'
         ## USE THIS CONFIG TO SET CUSTOM BUTTON TEXT (NOT REQUIRED TO SET "customTheme: true" TO USE THESE )
           - entity: light.hall_light
             type: custom:light-brightness-preset-row

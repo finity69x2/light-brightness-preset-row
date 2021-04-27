@@ -34,6 +34,8 @@ Then to use this in a card place the following in your entity card:
 | customTheme | Boolean | No | false | set to true to use a custom theme |
 | customSetpoints | Boolean | No | false | set to true to use custom brightness setpoints |
 | reverseButtons | Boolean | No | false | set to true to reverse the button order |
+| width | String | No | 30px | A custom width for the buttons |
+| height | String | No | 30px | A custom height for the buttons |
 | isOffColor | String | No | '#f44c09' | Sets the color of the 'Off' button if light is off |
 | isOnLowColor | String | No | '#43A047' | Sets the color of the 'Low' button if light is on low |
 | isOnMedColor | String | No | '#43A047' | Sets the color of the 'Med' button if light is on Medium |
@@ -95,8 +97,9 @@ This plugin can also be used with a group of dimmable lights by creating a "ligh
             customLowText: do
             customMedText: re
             customOffText: not
-            
-  ```
+            width: '15px'
+            height: '15px'
+```
 
 This is with the default Lovelace frontend theme set:
 

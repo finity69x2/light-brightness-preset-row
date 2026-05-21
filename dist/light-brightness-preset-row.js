@@ -76,15 +76,25 @@ class CustomLightBrightnessRow extends LitElement {
 			.brightness {
 				margin-left: 2px;
 				margin-right: 2px;
-				background-color: #759aaa;
-				border: 1px solid lightgrey; 
+				background-color: transparent;
+				border: 1px solid var(--divider-color, lightgrey); 
 				border-radius: 4px;
 				font-size: 10px !important;
-				color: inherit;
+				color: var(--primary-text-color);
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
 				text-align: center;
-				float: left !important;
-				padding: 1px;
+				line-height: 1;
+				padding: 1px 6px;
 				cursor: pointer;
+				opacity: 1;
+				transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+			}
+			.brightness[aria-pressed='true'] {
+				font-weight: 600;
+				border-color: var(--accent-color, var(--primary-color));
+				box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
 			}
 		`;
 	}
@@ -96,27 +106,27 @@ class CustomLightBrightnessRow extends LitElement {
 					<button
 						class='brightness'
 						style='${this._leftColor};min-width:${this._width};max-width:${this._width};height:${this._height}'
-						toggles name="${this._leftName}"
-						@click=${this.setBrightness}
-						.disabled=${this._leftState}>${this._leftText}</button>
+						aria-pressed="${this._leftState ? 'true' : 'false'}"
+						name="${this._leftName}"
+						@click=${this.setBrightness}>${this._leftText}</button>
 					<button
 						class='brightness'
 						style='${this._midLeftColor};min-width:${this._width};max-width:${this._width};height:${this._height}'
-						toggles name="${this._midLeftName}"
-						@click=${this.setBrightness}
-						.disabled=${this._midLeftState}>${this._midLeftText}</button>
+						aria-pressed="${this._midLeftState ? 'true' : 'false'}"
+						name="${this._midLeftName}"
+						@click=${this.setBrightness}>${this._midLeftText}</button>
 					<button
 						class='brightness'
 						style='${this._midRightColor};min-width:${this._width};max-width:${this._width};height:${this._height}'
-						toggles name="${this._midRightName}"
-						@click=${this.setBrightness}
-						.disabled=${this._midRightState}>${this._midRightText}</button>
+						aria-pressed="${this._midRightState ? 'true' : 'false'}"
+						name="${this._midRightName}"
+						@click=${this.setBrightness}>${this._midRightText}</button>
 					<button
 						class='brightness'
 						style='${this._rightColor};min-width:${this._width};max-width:${this._width};height:${this._height}'
-						toggles name="${this._rightName}"
-						@click=${this.setBrightness}
-						.disabled=${this._rightState}>${this._rightText}</button>
+						aria-pressed="${this._rightState ? 'true' : 'false'}"
+						name="${this._rightName}"
+						@click=${this.setBrightness}>${this._rightText}</button>
 				</div>
 			</hui-generic-entity-row>
 		`;
@@ -128,6 +138,9 @@ class CustomLightBrightnessRow extends LitElement {
 	}
 
 	setConfig(config) {
+		if (!config.entity) {
+			throw new Error("You need to define an entity");
+		}
 		this._config = { ...this._config, ...config };
 	}
 
@@ -163,10 +176,12 @@ class CustomLightBrightnessRow extends LitElement {
 		let lowSetpoint;
 		let medSetpoint;
 		let hiSetpoint;
-		let low;
-		let med;
-		let high;
-		let offstate;
+		let low = false;
+		let med = false;
+		let high = false;
+		let offstate = false;
+		const isOn = stateObj && stateObj.state === 'on';
+		const brightness = this._getBrightness(stateObj);
 		
 		if (custSetpoint) {
 			medSetpoint = parseInt(MedSetpoint);
@@ -180,31 +195,27 @@ class CustomLightBrightnessRow extends LitElement {
 			} else {
 				hiSetpoint = parseInt(HiSetpoint);
 			}
-			if (stateObj && stateObj.attributes) {
-				if (stateObj.state == 'on' && stateObj.attributes.brightness >= 0 && stateObj.attributes.brightness <= ((medSetpoint + lowSetpoint)/2 ) ) {
-					low = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness > ((medSetpoint + lowSetpoint)/2 ) && stateObj.attributes.brightness <= ((hiSetpoint + medSetpoint)/2) ) {
-					med = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness > ((hiSetpoint + medSetpoint)/2) && stateObj.attributes.brightness <= 255) {
-					high = 'on';
-				} else {
-					offstate = 'on';
-				}	
+			if (isOn && brightness !== null && brightness <= ((medSetpoint + lowSetpoint) / 2)) {
+				low = true;
+			} else if (isOn && brightness !== null && brightness <= ((hiSetpoint + medSetpoint) / 2)) {
+				med = true;
+			} else if (isOn) {
+				high = true;
+			} else {
+				offstate = true;
 			}
 		} else {
 			lowSetpoint =  parseInt(LowSetpoint);
 			medSetpoint = parseInt(MedSetpoint);
 			hiSetpoint = parseInt(HiSetpoint);
-			if (stateObj && stateObj.attributes) {
-				if (stateObj.state == 'on' && stateObj.attributes.brightness >= 0 && stateObj.attributes.brightness <= 85) {
-					low = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness >= 86 && stateObj.attributes.brightness <= 170) {
-					med = 'on';
-				} else if (stateObj.state == 'on' && stateObj.attributes.brightness >= 171 && stateObj.attributes.brightness <= 255) {
-					high = 'on';
-				} else {
-					offstate = 'on';
-				}
+			if (isOn && brightness !== null && brightness <= 85) {
+				low = true;
+			} else if (isOn && brightness !== null && brightness <= 170) {
+				med = true;
+			} else if (isOn) {
+				high = true;
+			} else {
+				offstate = true;
 			}
 		}
 		
@@ -215,46 +226,46 @@ class CustomLightBrightnessRow extends LitElement {
 
 				
 		if (custTheme) {
-			if (low == 'on') {
+			if (low) {
 				lowcolor = 'background-color:' + OnLowClr;
 			} else {
 				lowcolor = 'background-color:' + buttonOffClr;
 			}
-			if (med == 'on') {
+			if (med) {
 				medcolor = 'background-color:'  + OnMedClr;
 			} else {
 				medcolor = 'background-color:' + buttonOffClr;
 			}
-			if (high == 'on') {
+			if (high) {
 				hicolor = 'background-color:'  + OnHiClr;
 			} else {
 				hicolor = 'background-color:' + buttonOffClr;
 			}
-			if (offstate == 'on') {
+			if (offstate) {
 				offcolor = 'background-color:'  + OffClr;
 			} else {
 				offcolor = 'background-color:' + buttonOffClr;
 			}
 		} else {
-			if (low == 'on') {
-				lowcolor = 'background-color: var(--switch-checked-color)';
+			if (low) {
+				lowcolor = 'background-color: var(--state-light-active-color, var(--accent-color, var(--primary-color))); color: var(--text-primary-color, white); border-color: var(--state-light-active-color, var(--accent-color, var(--primary-color)))';
 			} else {
-				lowcolor = 'background-color: var(--switch-unchecked-color)';
+				lowcolor = 'background-color: transparent; color: var(--primary-text-color); border-color: var(--divider-color, #759aaa)';
 			}
-			if (med == 'on') {
-				medcolor = 'background-color: var(--switch-checked-color)';
+			if (med) {
+				medcolor = 'background-color: var(--state-light-active-color, var(--accent-color, var(--primary-color))); color: var(--text-primary-color, white); border-color: var(--state-light-active-color, var(--accent-color, var(--primary-color)))';
 			} else {
-				medcolor = 'background-color: var(--switch-unchecked-color)';
+				medcolor = 'background-color: transparent; color: var(--primary-text-color); border-color: var(--divider-color, #759aaa)';
 			}
-			if (high == 'on') {
-				hicolor = 'background-color: var(--switch-checked-color)';
+			if (high) {
+				hicolor = 'background-color: var(--state-light-active-color, var(--accent-color, var(--primary-color))); color: var(--text-primary-color, white); border-color: var(--state-light-active-color, var(--accent-color, var(--primary-color)))';
 			} else {
-				hicolor = 'background-color: var(--switch-unchecked-color)';
+				hicolor = 'background-color: transparent; color: var(--primary-text-color); border-color: var(--divider-color, #759aaa)';
 			}
-			if (offstate == 'on') {
-				offcolor = 'background-color: var(--switch-checked-color)';
+			if (offstate) {
+				offcolor = 'background-color: var(--disabled-color, var(--secondary-text-color, #759aaa)); color: var(--text-primary-color, white); border-color: var(--disabled-color, var(--secondary-text-color, #759aaa))';
 			} else {
-				offcolor = 'background-color: var(--switch-unchecked-color)';
+				offcolor = 'background-color: transparent; color: var(--primary-text-color); border-color: var(--divider-color, #759aaa)';
 			}
 		}
 
@@ -273,10 +284,10 @@ class CustomLightBrightnessRow extends LitElement {
 		
 		if (revButtons) {
 			this._stateObj = stateObj;
-			this._leftState = (offstate == 'on');
-			this._midLeftState = (low === 'on');
-			this._midRightState = (med === 'on');
-			this._rightState = (high === 'on');
+			this._leftState = offstate;
+			this._midLeftState = low;
+			this._midRightState = med;
+			this._rightState = high;
 			this._width = buttonwidth;
 			this._height = buttonheight;
 			this._leftColor = offcolor;
@@ -296,10 +307,10 @@ class CustomLightBrightnessRow extends LitElement {
 			this._rightName = hiname;
 		} else {
 			this._stateObj = stateObj;
-			this._leftState = (high == 'on');
-			this._midLeftState = (med === 'on');
-			this._midRightState = (low === 'on');
-			this._rightState = (offstate === 'on');
+			this._leftState = high;
+			this._midLeftState = med;
+			this._midRightState = low;
+			this._rightState = offstate;
 			this._width = buttonwidth;
 			this._height = buttonheight;
 			this._leftColor = hicolor;
@@ -318,6 +329,33 @@ class CustomLightBrightnessRow extends LitElement {
 			this._midRightName = lowname;
 			this._rightName = offname;
 		}
+	}
+
+	_getBrightness(stateObj) {
+		if (!stateObj || !stateObj.attributes) {
+			return null;
+		}
+
+		const brightness = Number(stateObj.attributes.brightness);
+		if (Number.isFinite(brightness)) {
+			return Math.max(0, Math.min(255, brightness));
+		}
+
+		const entityIds = stateObj.attributes.entity_id;
+		if (Array.isArray(entityIds) && entityIds.length > 0) {
+			const memberBrightness = entityIds
+				.map((entityId) => this.hass.states[entityId])
+				.filter((memberState) => memberState && memberState.state === 'on' && memberState.attributes)
+				.map((memberState) => Number(memberState.attributes.brightness))
+				.filter((value) => Number.isFinite(value));
+
+			if (memberBrightness.length > 0) {
+				const averageBrightness = memberBrightness.reduce((sum, value) => sum + value, 0) / memberBrightness.length;
+				return Math.max(0, Math.min(255, averageBrightness));
+			}
+		}
+
+		return null;
 	}
 
 	setBrightness(e) {
